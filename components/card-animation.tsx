@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import Card from "./card"
+import { RefreshCw } from "lucide-react"
 
 const challengeSentences = [
   "Try not to laugh for 30 seconds!",
@@ -17,29 +18,55 @@ const challengeSentences = [
   "Recite the alphabet backwards in 15 seconds!",
 ]
 
+const cardImages = [
+  "/images/card1.png",
+  "/images/card2.png",
+  "/images/card3.png",
+  "/images/card4.png",
+  "/images/card5.png",
+  "/images/card6.png",
+  "/images/card7.png",
+  "/images/card8.png",
+  "/images/card9.png",
+  "/images/card10.png",
+]
+
 export default function CardAnimation() {
   const [currentChallenge, setCurrentChallenge] = useState("")
   const [showFinalCard, setShowFinalCard] = useState(false)
-  const [selectedSvg, setSelectedSvg] = useState(0)
+  const [selectedImage, setSelectedImage] = useState("")
+
+  const selectRandomCard = () => {
+    // Pick a random challenge
+    const randomIndex = Math.floor(Math.random() * challengeSentences.length)
+    setCurrentChallenge(challengeSentences[randomIndex])
+
+    // Pick a random image (0-4)
+    const randomImageIndex = Math.floor(Math.random() * 10)
+    setSelectedImage(cardImages[randomImageIndex])
+  }
 
   useEffect(() => {
     // Show animated cards first
     const timer1 = setTimeout(() => {
       // Then show the final challenge card
       setShowFinalCard(true)
-      // Pick a random challenge
-      const randomIndex = Math.floor(Math.random() * challengeSentences.length)
-      setCurrentChallenge(challengeSentences[randomIndex])
-
-      // Pick a random SVG (0-4)
-      const randomSvgIndex = Math.floor(Math.random() * 5)
-      setSelectedSvg(randomSvgIndex)
+      selectRandomCard()
     }, 3000)
 
     return () => {
       clearTimeout(timer1)
     }
   }, [])
+
+  const handleNewCard = () => {
+    // Animate card out and in
+    setShowFinalCard(false)
+    setTimeout(() => {
+      selectRandomCard()
+      setShowFinalCard(true)
+    }, 300)
+  }
 
   return (
     <div className="relative w-full h-screen flex items-center justify-center">
@@ -145,126 +172,31 @@ export default function CardAnimation() {
               </svg>
             </motion.button>
 
-            {/* SVG Image */}
+            {/* Refresh button */}
+            <motion.button
+              onClick={handleNewCard}
+              className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center text-white hover:text-cyan-400 transition-colors duration-200 z-50"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.5 }}
+              whileHover={{ scale: 1.1, opacity: 1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <RefreshCw size={20} className="drop-shadow-[0_0_3px_rgba(255,255,255,0.5)]" />
+            </motion.button>
+
+            {/* PNG Image */}
             <motion.div
-              className="w-full h-full flex items-center justify-center"
+              className="absolute inset-[2px] rounded-2xl overflow-hidden"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.2 }}
             >
-              {selectedSvg === 0 && (
-                <svg
-                  width="200"
-                  height="200"
-                  viewBox="0 0 200 200"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="max-w-full max-h-full"
-                >
-                  <circle cx="100" cy="100" r="80" fill="url(#gradient1)" />
-                  <path
-                    d="M70 90 L90 110 L130 70"
-                    stroke="white"
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <defs>
-                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#39c5bb" />
-                      <stop offset="50%" stopColor="#ffdd57" />
-                      <stop offset="100%" stopColor="#ff9f43" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              )}
-
-              {selectedSvg === 1 && (
-                <svg
-                  width="200"
-                  height="200"
-                  viewBox="0 0 200 200"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="max-w-full max-h-full"
-                >
-                  <rect x="50" y="50" width="100" height="100" rx="20" fill="url(#gradient2)" />
-                  <circle cx="100" cy="100" r="30" fill="white" />
-                  <defs>
-                    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ff9f43" />
-                      <stop offset="50%" stopColor="#39c5bb" />
-                      <stop offset="100%" stopColor="#ffdd57" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              )}
-
-              {selectedSvg === 2 && (
-                <svg
-                  width="200"
-                  height="200"
-                  viewBox="0 0 200 200"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="max-w-full max-h-full"
-                >
-                  <polygon points="100,30 170,170 30,170" fill="url(#gradient3)" />
-                  <circle cx="100" cy="120" r="25" fill="white" />
-                  <defs>
-                    <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ffdd57" />
-                      <stop offset="50%" stopColor="#ff9f43" />
-                      <stop offset="100%" stopColor="#39c5bb" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              )}
-
-              {selectedSvg === 3 && (
-                <svg
-                  width="200"
-                  height="200"
-                  viewBox="0 0 200 200"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="max-w-full max-h-full"
-                >
-                  <path
-                    d="M100 30 L130 70 L180 70 L140 110 L160 160 L100 130 L40 160 L60 110 L20 70 L70 70 Z"
-                    fill="url(#gradient4)"
-                  />
-                  <circle cx="100" cy="100" r="20" fill="white" />
-                  <defs>
-                    <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#39c5bb" />
-                      <stop offset="50%" stopColor="#ff9f43" />
-                      <stop offset="100%" stopColor="#ffdd57" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              )}
-
-              {selectedSvg === 4 && (
-                <svg
-                  width="200"
-                  height="200"
-                  viewBox="0 0 200 200"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="max-w-full max-h-full"
-                >
-                  <ellipse cx="100" cy="100" rx="80" ry="60" fill="url(#gradient5)" />
-                  <rect x="80" y="80" width="40" height="40" rx="5" fill="white" />
-                  <defs>
-                    <linearGradient id="gradient5" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ff9f43" />
-                      <stop offset="50%" stopColor="#ffdd57" />
-                      <stop offset="100%" stopColor="#39c5bb" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              )}
+              <img
+                src={selectedImage || "/placeholder.svg"}
+                alt="Card Image"
+                className="w-full h-full object-cover rounded-2xl"
+              />
             </motion.div>
           </div>
         </motion.div>

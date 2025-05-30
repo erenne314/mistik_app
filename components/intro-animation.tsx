@@ -28,32 +28,8 @@ export default function IntroAnimation() {
         }}
       >
         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-yellow-400 opacity-70 blur-md" />
-        <div className="absolute inset-2 rounded-full bg-gray-900 flex items-center justify-center">
-          <svg
-            width="80"
-            height="80"
-            viewBox="0 0 80 80"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="max-w-full max-h-full"
-          >
-            {/* Example SVG content - replace with your desired image */}
-            <circle cx="40" cy="40" r="30" fill="url(#introGradient)" />
-            <path
-              d="M30 35 L35 40 L50 25"
-              stroke="white"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <defs>
-              <linearGradient id="introGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#39c5bb" />
-                <stop offset="50%" stopColor="#ffdd57" />
-                <stop offset="100%" stopColor="#ff9f43" />
-              </linearGradient>
-            </defs>
-          </svg>
+        <div className="absolute inset-2 rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
+          <img src="/images/intro_logo.png" alt="Intro Logo" className="w-full h-full object-cover rounded-full" />
         </div>
       </motion.div>
     </motion.div>
