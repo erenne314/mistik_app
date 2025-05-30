@@ -44,7 +44,7 @@ export default function CardAnimation() {
     setCurrentChallenge(challengeSentences[randomIndex])
 
     // Pick a random image (0-4)
-    const randomImageIndex = Math.floor(Math.random() * 10)
+    const randomImageIndex = Math.floor(Math.random() * 12)
     setSelectedImage(cardImages[randomImageIndex])
   }
 
