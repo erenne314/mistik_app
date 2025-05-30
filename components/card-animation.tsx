@@ -29,6 +29,8 @@ const cardImages = [
   "/images/card8.png",
   "/images/card9.png",
   "/images/card10.png",
+  "/images/card11.png",
+  "/images/card12.png",
 ]
 
 export default function CardAnimation() {
