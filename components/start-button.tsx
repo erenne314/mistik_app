@@ -39,7 +39,7 @@ export default function StartButton({ onClick }: StartButtonProps) {
       {/* Inner content */}
       <div className="absolute inset-[2px] rounded-2xl bg-gray-800 flex flex-col items-center justify-center">
         <div className="absolute inset-0 rounded-2xl overflow-hidden">
-          <img src="/images/mistik_start.png" alt="Start Logo" className="w-full h-full object-cover rounded-2xl" />
+          <img src="/images/tufa_start.png" alt="Start Logo" className="w-full h-full object-cover rounded-2xl" />
         </div>
       </div>
     </motion.button>
